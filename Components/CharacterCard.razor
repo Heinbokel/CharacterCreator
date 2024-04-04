@@ -1,0 +1,20 @@
+<div class="col-md-4 mb-4">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col">
+                    @Character.Name
+                </div>
+                <div class="col-auto">
+                    <button @onclick="DeleteCharacter" class="btn btn-danger">X</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@Character.Class</h5>
+            <p class="card-text">Race: @Character.Race</p>
+            <p class="card-text">Date of Birth: @Character.DateOfBirth.ToString("yyyy-MM-dd")</p>
+            <p class="card-text">@Character.Biography</p>
+        </div>
+    </div>
+</div>
