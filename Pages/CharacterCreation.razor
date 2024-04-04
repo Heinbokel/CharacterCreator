@@ -1,0 +1,40 @@
+@page "/create"
+
+<PageTitle>Create a Character</PageTitle>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Create New Character</h4>
+                </div>
+                <div class="card-body">
+                    <form @onsubmit="SubmitForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter name" @bind="Character.Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="class">Class</label>
+                            <input type="text" class="form-control" id="class" placeholder="Enter class" @bind="Character.Class">
+                        </div>
+                        <div class="form-group">
+                            <label for="race">Race</label>
+                            <input type="text" class="form-control" id="race" placeholder="Enter race" @bind="Character.Race">
+                        </div>
+                        <div class="form-group">
+                            <label for="dateOfBirth">Date of Birth</label>
+                            <input type="date" class="form-control" id="dateOfBirth" @bind="Character.DateOfBirth">
+                        </div>
+                        <div class="form-group">
+                            <label for="biography">Biography</label>
+                            <textarea class="form-control" id="biography" rows="3" placeholder="Enter biography" @bind="Character.Biography"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Character</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
