@@ -13,6 +13,7 @@ public class CharacterService
         {
             new Character
             {
+                Id = 1,
                 Name = "Rytlock Brimstone",
                 Class = "Revenant",
                 Race = "Charr",
@@ -21,6 +22,7 @@ public class CharacterService
             },
             new Character
             {
+                Id = 2,
                 Name = "Caithe",
                 Class = "Thief",
                 Race = "Sylvari",
@@ -29,6 +31,7 @@ public class CharacterService
             },
             new Character
             {
+                Id = 3,
                 Name = "Logan Thackeray",
                 Class = "Guardian",
                 Race = "Human",
@@ -37,6 +40,7 @@ public class CharacterService
             },
             new Character
             {
+                Id = 4,
                 Name = "Zojja",
                 Class = "Engineer",
                 Race = "Asura",
@@ -45,6 +49,7 @@ public class CharacterService
             },
             new Character
             {
+                Id = 5,
                 Name = "Rox",
                 Class = "Ranger",
                 Race = "Charr",
@@ -53,6 +58,7 @@ public class CharacterService
             },
             new Character
             {
+                Id = 6,
                 Name = "Braham Eirsson",
                 Class = "Warrior",
                 Race = "Norn",
@@ -61,6 +67,7 @@ public class CharacterService
             },
             new Character
             {
+                Id = 7,
                 Name = "Marjory Delaqua",
                 Class = "Necromancer",
                 Race = "Human",
@@ -69,6 +76,7 @@ public class CharacterService
             },
             new Character
             {
+                Id = 8,
                 Name = "Kasmeer Meade",
                 Class = "Mesmer",
                 Race = "Human",
@@ -77,6 +85,7 @@ public class CharacterService
             },
             new Character
             {
+                Id = 9,
                 Name = "Taimi",
                 Class = "Elementalist",
                 Race = "Asura",
@@ -85,6 +94,7 @@ public class CharacterService
             },
             new Character
             {
+                Id = 10,
                 Name = "Frank Reynolds",
                 Class = "Revenant",
                 Race = "Human",
@@ -106,6 +116,16 @@ public class CharacterService
     }
 
     /// <summary>
+    /// Retrieves the nullable character with the given ID.
+    /// </summary>
+    /// <param name="id">The ID of the character to find.</param>
+    /// <returns>The IObservable of type Nullable Character to return.</returns>
+    public IObservable<Character?> GetCharacterById(int id)
+    {
+        return this.CharactersSubject.Select(characters => characters.FirstOrDefault(c => c.Id == id));
+    }
+
+    /// <summary>
     /// Returns our BehaviorSubject as an Observable that we can Observe.
     /// </summary>
     /// <returns>The observable to return.</returns>
@@ -119,6 +139,7 @@ public class CharacterService
     /// <param name="character">The character to add to our list.</param>
     public void AddCharacter(Character character)
     {
+        character.Id = this.Characters.Count + 1;
         Characters.Add(character);
         CharactersSubject.OnNext(Characters);
     }
@@ -132,4 +153,5 @@ public class CharacterService
         Characters.Remove(characterToDelete);
         CharactersSubject.OnNext(Characters);
     }
+
 }

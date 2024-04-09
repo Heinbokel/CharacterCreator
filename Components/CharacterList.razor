@@ -1,8 +1,13 @@
+@if (DisplayFeedbackMessage)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">@FeedbackMessage</div>
+}
+
 <div class="container">
     <div class="row">
         @foreach (Character character in Characters)
         {
-            <CharacterCard Character="character"/>
+            <CharacterCard Character="character" />
         }
     </div>
 </div>

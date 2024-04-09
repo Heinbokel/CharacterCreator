@@ -1,0 +1,39 @@
+@page "/character-details/{Id:int}"
+
+@if (!IsLoading)
+{
+    @if (Character != null)
+    {
+        <div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@Character.Name</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>ID:</strong> @Character.Id<br>
+                    <strong>Name:</strong> @Character.Name<br>
+                    <strong>Class:</strong> @Character.Class<br>
+                    <strong>Race:</strong> @Character.Race<br>
+                    <strong>Date of Birth:</strong> @Character.DateOfBirth.ToString("MM/dd/yyyy")<br>
+                    <strong>Biography:</strong> @Character.Biography<br>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary">Edit</button>
+            <button class="btn btn-danger ml-2" @onclick="DeleteCharacter">Delete</button>
+        </div>
+    </div>
+</div>
+    }
+    else if (ErrorOccurred)
+    {
+        <p>@ErrorMessage</p>
+    }
+}
+else
+{
+    <p>Retrieving Character...</p>
+}
