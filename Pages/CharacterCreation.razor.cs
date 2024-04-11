@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Components;
 namespace CharacterCreator.Pages;
 
 public partial class CharacterCreation: ComponentBase {
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
 
     // Inject our Character Service as we have seen elsewhere.
     [Inject]
@@ -18,6 +20,7 @@ public partial class CharacterCreation: ComponentBase {
     // and notifying all observers that the list of characters has changed.
     private void SubmitForm() {
         this._characterService.AddCharacter(this.Character);
+        this.NavigationManager.NavigateTo($"/character-details/{this.Character.Id}?createdCharacter={this.Character.Name}");
         this.Character = new Character();
     }
 

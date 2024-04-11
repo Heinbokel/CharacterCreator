@@ -1,3 +1,4 @@
+using System.Web;
 using CharacterCreator.Models;
 using CharacterCreator.Services;
 using Microsoft.AspNetCore.Components;
@@ -27,6 +28,11 @@ public partial class CharacterDetails: ComponentBase {
     private bool ErrorOccurred = false;
     private string ErrorMessage = "";
 
+    private bool DisplayFeedbackMessage {get; set;}
+
+    // Variable used to display a feedback message to the user.
+    private string FeedbackMessage { get; set; }
+
     /// <summary>
     /// Logic to run on the OnInitialized lifecycle hook.
     /// This runs after this component has rendered to the screen.
@@ -34,6 +40,7 @@ public partial class CharacterDetails: ComponentBase {
     protected override void OnInitialized()
     {
         RetrieveCharacter();
+        DetermineFeedbackMessages();
     }
 
     /// <summary>
@@ -77,5 +84,28 @@ public partial class CharacterDetails: ComponentBase {
         // Navigate to the Home Page (which is defined with a path of '/', so just the base URL of the website)
         // including a URL parameter.
         this.NavigationManager.NavigateTo($"?deletedCharacter={this.Character.Name}");
+    }
+
+    /// <summary>
+    /// Determines the feedback messages to display.
+    /// </summary>
+    private void DetermineFeedbackMessages()
+    {
+        // Get the current URL as a Uri so we can parse it easier.
+        var uri = new Uri(NavigationManager.Uri);
+
+        // Get the query parameters with our built in HttpUtility method.
+        var queryParams = HttpUtility.ParseQueryString(uri.Query);
+
+        // Get the value of the "createdCharacter" parameter
+        var createdCharacterName = queryParams["createdCharacter"];
+
+        // Check if createdCharacter param even exists. If so, update our feedback message.
+        if (!string.IsNullOrEmpty(createdCharacterName))
+        {
+            // Update feedback state
+            this.DisplayFeedbackMessage = true;
+            this.FeedbackMessage = $"{createdCharacterName} was successfully created.";
+        }
     }
 }
